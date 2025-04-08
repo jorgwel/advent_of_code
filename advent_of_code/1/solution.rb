@@ -1,5 +1,5 @@
 
-def inverse_captcha(input) 
+def inverse_captcha_next_item(input) 
   sum = 0
   input.each_char.with_index do |char, idx|
       current_index = idx 
