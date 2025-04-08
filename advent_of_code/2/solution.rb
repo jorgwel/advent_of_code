@@ -13,9 +13,9 @@ end
 
 def collect_row_numbers(row)
   columns_buffer = []
-  row.each_char.with_index do |char, index|
-    if (char != ' ') 
-      columns_buffer << char.to_i
+  row.split(" ") do |number_str, index|
+    if (number_str != ' ') 
+      columns_buffer << number_str.to_i
     end 
   end
   columns_buffer
