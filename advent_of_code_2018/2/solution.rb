@@ -51,3 +51,50 @@ def turn_string_into_unique_sorted_chars(line)
   end
   [unique_chars, sorted_chars]
 end
+
+def infer_common_letters_for_2_product_ids(product_ids_string)
+  product_ids = product_ids_string.split("\n")
+
+  id_of_distinct_char = nil
+  count_of_distinct_chars = 0
+  actual_product_id_chars = nil
+
+  (0...product_ids.length).each do |i|
+    if (!id_of_distinct_char.nil?) 
+      next
+    end
+    current_product_id = product_ids[i].strip()
+    if (current_product_id.length == 0)
+      next
+    end
+    (0...product_ids.length).each do |j|
+      if (!id_of_distinct_char.nil?) 
+        next
+      end
+      next_product_id = product_ids[j].strip()
+
+      current_product_id_chars = current_product_id.chars
+      next_product_id_chars = next_product_id.chars
+      current_product_id_chars.each_with_index do |product_id_char, product_id_index|
+        
+        next_product_id_char = next_product_id_chars[product_id_index]
+          if (product_id_char != next_product_id_char)
+            
+            count_of_distinct_chars = count_of_distinct_chars + 1
+            if (id_of_distinct_char.nil?)
+              id_of_distinct_char = product_id_index
+              actual_product_id_chars = current_product_id_chars
+            end
+          end
+        
+      end
+      if (count_of_distinct_chars != 1)
+        actual_product_id_chars = nil
+        id_of_distinct_char = nil
+        count_of_distinct_chars = 0
+      end
+    end
+  end
+  actual_product_id_chars.delete_at(id_of_distinct_char)
+  actual_product_id_chars.join("")
+end
